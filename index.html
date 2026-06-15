@@ -1,0 +1,301 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheFrontDesk - Connect & Share</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-tfd">TFD</span>
+                <span class="logo-text">TheFrontDesk</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn-login" onclick="openLoginModal()">Login</button>
+                <button class="btn-signup" onclick="openSignupModal()">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to <span class="highlight">TheFrontDesk</span></h1>
+            <p>Connect with people worldwide, share moments, and communicate freely</p>
+            <button class="btn-cta" onclick="openSignupModal()">Get Started Now</button>
+        </div>
+        <div class="hero-image">
+            <i class="fas fa-globe"></i>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2>Our Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-camera"></i>
+                <h3>Photo Sharing</h3>
+                <p>Upload and share your favorite photos with your connections instantly</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-comments"></i>
+                <h3>Real-time Chat</h3>
+                <p>Send messages and communicate with friends anytime, anywhere</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-users"></i>
+                <h3>Build Community</h3>
+                <p>Connect with like-minded people and build meaningful relationships</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-lock"></i>
+                <h3>Secure & Private</h3>
+                <p>Your data is encrypted and protected with enterprise-level security</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Mobile Friendly</h3>
+                <p>Access TheFrontDesk from any device, anytime</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-zap"></i>
+                <h3>Lightning Fast</h3>
+                <p>Experience blazing fast performance and smooth interactions</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About TheFrontDesk</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>TheFrontDesk is a modern communication platform designed to bring people together. Whether you want to share photos, chat with friends, or build a community, TheFrontDesk provides all the tools you need.</p>
+                <p>Our mission is to create a safe, inclusive, and user-friendly space where people from all over the world can connect and communicate freely.</p>
+                <ul class="about-list">
+                    <li><i class="fas fa-check"></i> End-to-end encrypted messaging</li>
+                    <li><i class="fas fa-check"></i> High-resolution photo storage</li>
+                    <li><i class="fas fa-check"></i> Group chat functionality</li>
+                    <li><i class="fas fa-check"></i> User verification system</li>
+                    <li><i class="fas fa-check"></i> 24/7 customer support</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <h3>Email</h3>
+                <p>hubdarkest@gmail.com</p>
+                <a href="mailto:hubdarkest@gmail.com" class="contact-link">Send Email</a>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-phone"></i>
+                <h3>WhatsApp</h3>
+                <p>+254 714 810 214</p>
+                <a href="https://wa.me/254714810214" target="_blank" class="contact-link">Start Chat</a>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-paper-plane"></i>
+                <h3>Telegram</h3>
+                <p>@TheFrontDeskOfficial</p>
+                <a href="https://t.me/TheFrontDeskOfficial" target="_blank" class="contact-link">Join Channel</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login to TheFrontDesk</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <div class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                </div>
+                <button type="submit" class="btn-submit">Login</button>
+            </form>
+            <p class="form-footer">Don't have an account? <a href="#" onclick="switchToSignup()">Sign Up</a></p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSignupModal()">&times;</span>
+            <h2>Create Your Account</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPhone">Phone Number</label>
+                    <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirm Password</label>
+                    <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required>
+                </div>
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
+                </div>
+                <button type="submit" class="btn-submit">Create Account</button>
+            </form>
+            <p class="form-footer">Already have an account? <a href="#" onclick="switchToLogin()">Login</a></p>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="dashboard" style="display: none;">
+        <div class="dashboard-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h3>TheFrontDesk</h3>
+                    <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="#" class="nav-item active" onclick="showSection('feed')"><i class="fas fa-home"></i> Feed</a>
+                    <a href="#" class="nav-item" onclick="showSection('messages')"><i class="fas fa-comments"></i> Messages</a>
+                    <a href="#" class="nav-item" onclick="showSection('photos')"><i class="fas fa-images"></i> Photos</a>
+                    <a href="#" class="nav-item" onclick="showSection('profile')"><i class="fas fa-user"></i> Profile</a>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Feed Section -->
+                <section id="feed-section" class="content-section active">
+                    <div class="feed-header">
+                        <h2>Feed</h2>
+                    </div>
+                    <div class="create-post">
+                        <input type="text" placeholder="What's on your mind?" class="post-input" id="postInput">
+                        <button class="btn-post" onclick="openPhotoUpload()"><i class="fas fa-camera"></i> Photo</button>
+                        <button class="btn-post" onclick="createPost()"><i class="fas fa-paper-plane"></i> Post</button>
+                    </div>
+                    <div class="posts-container" id="postsContainer"></div>
+                </section>
+
+                <!-- Messages Section -->
+                <section id="messages-section" class="content-section">
+                    <div class="messages-header">
+                        <h2>Messages</h2>
+                        <button class="btn-new-chat" onclick="openNewChat()"><i class="fas fa-plus"></i> New Chat</button>
+                    </div>
+                    <div class="messages-container" id="messagesContainer"></div>
+                </section>
+
+                <!-- Photos Section -->
+                <section id="photos-section" class="content-section">
+                    <div class="photos-header">
+                        <h2>My Photos</h2>
+                        <button class="btn-upload" onclick="openPhotoUpload()"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
+                    </div>
+                    <div class="photos-gallery" id="photosGallery"></div>
+                </section>
+
+                <!-- Profile Section -->
+                <section id="profile-section" class="content-section">
+                    <div class="profile-header">
+                        <h2>My Profile</h2>
+                    </div>
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h3 id="profileName">User Name</h3>
+                            <p id="profileEmail">user@email.com</p>
+                            <p id="profilePhone">+254 712 345 678</p>
+                        </div>
+                        <button class="btn-edit-profile" onclick="editProfile()"><i class="fas fa-edit"></i> Edit</button>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <p class="stat-value">42</p>
+                            <p class="stat-label">Followers</p>
+                        </div>
+                        <div class="stat">
+                            <p class="stat-value">128</p>
+                            <p class="stat-label">Following</p>
+                        </div>
+                        <div class="stat">
+                            <p class="stat-value">356</p>
+                            <p class="stat-label">Posts</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </section>
+
+    <!-- Photo Upload Modal -->
+    <div id="photoUploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePhotoUpload()">&times;</span>
+            <h2>Upload Photo</h2>
+            <form id="photoUploadForm">
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag and drop or click to select</p>
+                    <input type="file" id="photoFile" accept="image/*" style="display: none;">
+                </div>
+                <div id="photoPreview" class="photo-preview" style="display: none;">
+                    <img id="previewImage" src="" alt="Preview">
+                </div>
+                <textarea placeholder="Add a caption..." class="photo-caption" id="photoCaption"></textarea>
+                <button type="submit" class="btn-submit">Upload Photo</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 TheFrontDesk. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
