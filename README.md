@@ -75,6 +75,12 @@ TheFrontDesk/
    - Your site will be available at: `https://Ceebree148102.github.io/TheFrontDesk/`
    - GitHub typically deploys within 1-2 minutes
 
+5. **Custom Domain (Optional)**
+   1. Go to Settings > Pages
+   2. Under "Custom domain", enter your domain
+   3. Update DNS records at your domain provider
+   4. GitHub will handle HTTPS automatically
+
 ## 📱 Responsive Breakpoints
 
 - **Desktop**: 1200px and above
@@ -90,7 +96,7 @@ TheFrontDesk/
 - **Dark Background**: `#0f172a`
 - **Light Background**: `#f8fafc`
 
-## 📊 Performance Optimization
+## ⚡ Performance Optimization
 
 ✅ Minified CSS and JavaScript
 ✅ Optimized images and icons
@@ -131,7 +137,7 @@ The website includes a notification system that displays:
 - Error messages
 - Auto-dismiss after 3 seconds
 
-## 🎯 SEO Meta Tags
+## 📊 SEO Meta Tags
 
 ```html
 <meta name="description" content="TheFrontDesk - Connect & Share...">
@@ -186,16 +192,16 @@ The website includes a notification system that displays:
 - Check branch is set to "main"
 
 ### Styles not loading
-- Ensure CSS files are in the correct `css/` directory
-- Check file paths are relative
-- Clear browser cache
+- Check if CSS files are in correct folders
+- Verify relative paths in HTML: `href="css/styles.css"`
+- Ensure case sensitivity matches file names
 
 ### Forms not working
 - Check JavaScript console for errors
 - Ensure JavaScript file is loaded
 - Forms are client-side only (no backend)
 
-## 📚 Browser Support
+## 🌐 Browser Support
 
 - Chrome (latest)
 - Firefox (latest)
@@ -203,7 +209,7 @@ The website includes a notification system that displays:
 - Edge (latest)
 - Mobile browsers
 
-## 📝 License
+## 📜 License
 
 This project is open source and available for personal and commercial use.
 
