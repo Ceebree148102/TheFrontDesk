@@ -1,0 +1,159 @@
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 2rem 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-image i {
+        font-size: 8rem;
+    }
+
+    .features h2, .about h2, .pricing h2, .contact h2 {
+        font-size: 2rem;
+    }
+
+    .features-grid,
+    .pricing-grid,
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-card.featured {
+        transform: scale(1);
+    }
+
+    .about-list {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0 1rem;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        flex-direction: column;
+        gap: 0;
+        padding: 1rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s;
+    }
+
+    .nav-links.active {
+        max-height: 500px;
+    }
+
+    .nav-links li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-buttons {
+        display: none;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-image i {
+        font-size: 5rem;
+    }
+
+    .btn-cta {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .features h2, .about h2, .pricing h2, .contact h2 {
+        font-size: 1.5rem;
+    }
+
+    .feature-card,
+    .pricing-card,
+    .contact-card {
+        padding: 1.5rem;
+    }
+
+    .feature-card i {
+        font-size: 2rem;
+    }
+
+    .contact-card i {
+        font-size: 2rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 20% auto;
+        padding: 1.5rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .notification {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        width: auto;
+    }
+}
+
+/* Extra small devices (320px) */
+@media (max-width: 320px) {
+    .hero-content h1 {
+        font-size: 1.2rem;
+    }
+
+    .features h2, .about h2, .pricing h2, .contact h2 {
+        font-size: 1.3rem;
+    }
+
+    .modal-content {
+        width: 100%;
+    }
+}
+
+/* Large screens (1200px and above) */
+@media (min-width: 1200px) {
+    .features-grid,
+    .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
