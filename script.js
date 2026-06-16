@@ -386,8 +386,11 @@ function handleDragOver(event) {
 
 // ============ Messaging Functions ============
 function openNewChat() {
-    alert('Chat with other users feature coming soon!');
+    if (typeof Tawk_API !== 'undefined') {
+        Tawk_API.maximize();
+    }
 }
+
 
 function openConversation() {
     alert('Message feature under development!');
