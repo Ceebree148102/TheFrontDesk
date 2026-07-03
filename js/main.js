@@ -1,4 +1,4 @@
-// Modal Functions
+// Modal Functions and Auth Integration
 function openLoginModal() {
     document.getElementById('loginModal').style.display = 'block';
 }
@@ -50,51 +50,102 @@ window.onclick = function(event) {
     }
 }
 
-// Form Handlers
-function handleLogin(event) {
+// Notification System
+function showNotification(message, type = 'success') {
+    const notification = document.getElementById('notification');
+    if (!notification) return alert(message);
+    notification.textContent = message;
+    notification.className = 'notification show ' + type;
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 3000);
+}
+
+// Authentication helpers
+const API_BASE = '';// relative path, will work when backend is co-hosted or proxied
+
+async function apiPost(path, body) {
+    const res = await fetch(API_BASE + path, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.message || 'Request failed');
+    return data;
+}
+
+// Form Handlers (wired to backend)
+async function handleLogin(event) {
     event.preventDefault();
     const form = event.target;
-    const email = form.querySelector('input[type="email"]').value;
+    const email = form.querySelector('input[type="email"]').value.trim();
     const password = form.querySelector('input[type="password"]').value;
 
-    // Validate
-    if (email && password) {
-        showNotification('Login successful! Redirecting...', 'success');
-        // Here you would typically send data to a backend
-        console.log('Login:', { email, password });
+    if (!email || !password) {
+        showNotification('Please provide email and password', 'error');
+        return;
+    }
+
+    try {
+        const data = await apiPost('/api/auth/login', { email, password });
+        localStorage.setItem('tfd_token', data.token);
+        localStorage.setItem('tfd_user', JSON.stringify(data.user));
+        showNotification('Login successful! Redirecting to chat...', 'success');
+        setAuthUI();
         setTimeout(() => {
             closeLoginModal();
             form.reset();
-        }, 1500);
+            window.location.href = '/chat.html';
+        }, 900);
+    } catch (err) {
+        console.error('Login error', err);
+        showNotification(err.message || 'Login failed', 'error');
     }
 }
 
-function handleSignup(event) {
+async function handleSignup(event) {
     event.preventDefault();
     const form = event.target;
-    const name = form.querySelector('input[type="text"]').value;
-    const email = form.querySelectorAll('input[type="email"]')[0].value;
+    const name = form.querySelector('input[type="text"]').value.trim();
+    const email = form.querySelectorAll('input[type="email"]')[0].value.trim();
     const password = form.querySelectorAll('input[type="password"]')[0].value;
     const confirmPassword = form.querySelectorAll('input[type="password"]')[1].value;
     const agreeTerms = form.querySelector('input[type="checkbox"]').checked;
 
-    // Validate
+    if (!name || !email || !password) {
+        showNotification('Please fill all required fields', 'error');
+        return;
+    }
     if (password !== confirmPassword) {
         showNotification('Passwords do not match!', 'error');
         return;
     }
+    if (!agreeTerms) {
+        showNotification('You must agree to the Terms of Service', 'error');
+        return;
+    }
 
-    if (name && email && password && agreeTerms) {
-        showNotification('Account created successfully! Welcome to TheFrontDesk!', 'success');
-        console.log('Signup:', { name, email, password });
+    try {
+        const data = await apiPost('/api/auth/register', { name, email, password });
+        localStorage.setItem('tfd_token', data.token);
+        localStorage.setItem('tfd_user', JSON.stringify(data.user));
+        showNotification('Account created! Redirecting to chat...', 'success');
+        setAuthUI();
         setTimeout(() => {
             closeSignupModal();
             form.reset();
-        }, 1500);
+            window.location.href = '/chat.html';
+        }, 900);
+    } catch (err) {
+        console.error('Signup error', err);
+        showNotification(err.message || 'Signup failed', 'error');
     }
 }
 
-function handleContactSubmit(event) {
+// Contact form unchanged — still client-side unless you add an endpoint
+async function handleContactSubmit(event) {
     event.preventDefault();
     const form = event.target;
     const name = form.querySelector('input[type="text"]').value;
@@ -113,15 +164,47 @@ function handleContactSubmit(event) {
     }
 }
 
-// Notification System
-function showNotification(message, type = 'success') {
-    const notification = document.getElementById('notification');
-    notification.textContent = message;
-    notification.className = 'notification show ' + type;
-    
-    setTimeout(() => {
-        notification.classList.remove('show');
-    }, 3000);
+// Logout
+function logout() {
+    localStorage.removeItem('tfd_token');
+    localStorage.removeItem('tfd_user');
+    setAuthUI();
+    showNotification('Logged out', 'success');
+}
+
+// Update navigation auth UI
+function setAuthUI() {
+    const navButtons = document.querySelector('.nav-buttons');
+    const token = localStorage.getItem('tfd_token');
+    const user = JSON.parse(localStorage.getItem('tfd_user') || 'null');
+    if (!navButtons) return;
+    if (token && user) {
+        navButtons.innerHTML = `
+            <button class="btn" id="chatBtn">Chat</button>
+            <div class="user-info">${escapeHtml(user.name)}</div>
+            <button class="btn-logout" id="logoutBtn">Logout</button>
+        `;
+        const chatBtn = document.getElementById('chatBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (chatBtn) chatBtn.addEventListener('click', () => window.location.href = '/chat.html');
+        if (logoutBtn) logoutBtn.addEventListener('click', logout);
+    } else {
+        navButtons.innerHTML = `
+            <button class="btn-login" onclick="openLoginModal()">Login</button>
+            <button class="btn-signup" onclick="openSignupModal()">Sign Up</button>
+        `;
+    }
+}
+
+// Escape helper
+function escapeHtml(unsafe) {
+    if (!unsafe) return '';
+    return String(unsafe)
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/\"/g, "&quot;")
+         .replace(/'/g, "&#039;");
 }
 
 // Hamburger Menu
@@ -138,7 +221,7 @@ if (hamburger) {
 const navItems = document.querySelectorAll('.nav-link');
 navItems.forEach(item => {
     item.addEventListener('click', () => {
-        navLinks.classList.remove('active');
+        if (navLinks) navLinks.classList.remove('active');
     });
 });
 
@@ -163,4 +246,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     console.log('TheFrontDesk website loaded successfully!');
+    setAuthUI();
+
+    // Attach form listeners if they exist
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const contactForm = document.getElementById('contactForm');
+    if (loginForm) loginForm.addEventListener('submit', handleLogin);
+    if (signupForm) signupForm.addEventListener('submit', handleSignup);
+    if (contactForm) contactForm.addEventListener('submit', handleContactSubmit);
 });
