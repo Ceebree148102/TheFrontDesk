@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TheFrontDesk Chat</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .chat-container { max-width: 900px; margin: 2rem auto; background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);} 
+    .messages { height: 400px; overflow-y: auto; padding: 1rem; border: 1px solid #eee; border-radius: 8px; }
+    .message { margin-bottom: 0.75rem; }
+    .message .meta { font-size: 0.85rem; color: var(--text-light); }
+    .composer { display:flex; gap: 0.5rem; margin-top: 1rem; }
+    .composer input { flex:1; padding: 0.75rem; border-radius: 6px; border:1px solid var(--border-color);} 
+    .composer button { padding: 0.75rem 1rem; border-radius:6px; background: linear-gradient(135deg,var(--primary-color), var(--secondary-color)); color:#fff; border:none; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo"><span class="logo-tfd">TFD</span> <span class="logo-text">TheFrontDesk</span></div>
+      <div class="nav-buttons"><button onclick="location.href='/index.html'" class="btn-login">Back</button></div>
+    </div>
+  </nav>
+
+  <div class="chat-container">
+    <h2>Global Chat</h2>
+    <div id="messages" class="messages"></div>
+    <div class="composer">
+      <input id="msgInput" placeholder="Write a message..." />
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>
